@@ -59,11 +59,8 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir, config=None):
             * :obj:`SedDocumentResults`: results
             * :obj:`CombineArchiveLog`: log
     '''
-    # process sed result
-    results, log = exec_sedml_docs_in_archive(exec_sed_doc, archive_filename, out_dir,
-                                              apply_xml_model_changes=False,
-                                              config=config)
 
+    print('GENERATING A SIMULARIUM FILE ------------- ')
     # extract contents from archive
     temp_archive_root = tempfile.mkdtemp()
     with zipfile.ZipFile(archive_filename, 'r') as ref:
@@ -75,6 +72,13 @@ def exec_sedml_docs_in_combine_archive(archive_filename, out_dir, config=None):
         output_dir=out_dir,
         use_json=True
     )
+
+    print('RUNNING A SEDML SIMULATION ------------------ ')
+
+    # process sed result
+    results, log = exec_sedml_docs_in_archive(exec_sed_doc, archive_filename, out_dir,
+                                              apply_xml_model_changes=False,
+                                              config=config)
 
     return results, log
 
